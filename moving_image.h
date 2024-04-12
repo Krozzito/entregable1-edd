@@ -87,9 +87,8 @@ public:
 
     // Mover la capa roja
     for (int i = 0; i < H_IMG; i++)
-      for (int j = 0; j < W_IMG - d; j++)
-        //tmp_layer[i][j] = red_layer[i][j + d];
-        tmp_layer[i][j] = red_layer[i][j];
+      for (int j = 0; j < d; j++)
+        tmp_layer[i][j] = red_layer[i][j + d];
 
     for (int i = 0; i < H_IMG; i++)
       for (int j = W_IMG - d, k = 0; j < W_IMG; j++, k++)
@@ -125,6 +124,56 @@ public:
       for (int j = 0; j < W_IMG; j++)
         blue_layer[i][j] = tmp_layer[i][j];
   }
+
+  // Mover a la derecha de manera circular
+  void move_right(int d)
+  {
+    unsigned char **tmp_layer = new unsigned char *[H_IMG];
+    for (int i = 0; i < H_IMG; i++)
+      tmp_layer[i] = new unsigned char[W_IMG];
+
+    // Mover la capa roja
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0; j < d; j++)
+      tmp_layer[i][j+d] = red_layer[i][j];
+  
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0, k = d; j < W_IMG-d; j++, k++)
+        tmp_layer[i][j] = red_layer[i][k];
+
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0; j < W_IMG; j++)
+        red_layer[i][j] = tmp_layer[i][j];
+
+    // Mover la capa verde
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0; j < d; j++)
+      tmp_layer[i][j+d] = green_layer[i][j];
+  
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0, k = d; j < W_IMG-d; j++, k++)
+        tmp_layer[i][j] = green_layer[i][k];
+
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0; j < W_IMG; j++)
+        green_layer[i][j] = tmp_layer[i][j];
+
+    // Mover la capa azul
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0; j < d; j++)
+        tmp_layer[i][j+d] = blue_layer[i][j];
+  
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0, k = d; j < W_IMG-d; j++, k++)
+        tmp_layer[i][j] = blue_layer[i][k];
+
+    for (int i = 0; i < H_IMG; i++)
+      for (int j = 0; j < W_IMG; j++)
+        blue_layer[i][j] = tmp_layer[i][j];
+  }
+
+
+
 
 private:
   // Función privada que guarda la imagen en formato .png

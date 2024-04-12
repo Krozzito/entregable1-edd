@@ -12,8 +12,8 @@ int main() {
   moving_image im;
 
   im.draw("imagen.png");
-  im.move_left(250);
-  Sleep(2000);
+  im.move_right(200);
+  Sleep(1000);
   im.draw("imagen_desplazada_500.png");
 //  im.move_left(100);
 //  Sleep(2000);
