@@ -6,18 +6,26 @@
  */
 
 #include "moving_image.h"
+#include <iostream>
 #include <windows.h> // para sleep (linux). Usar  #include<windows.h> para Windows
 
 int main() {
   moving_image im;
 
   im.draw("imagen.png");
-  im.move_right(200);
-  Sleep(1000);
-  im.draw("imagen_desplazada_500.png");
-//  im.move_left(100);
-//  Sleep(2000);
-//  im.draw("imagen_desplazada_600.png");
+  im.rotate();
+  im.draw("1.png");
+  im.move_left(500);
+  im.draw("2.png");
+  im.move_up(500);
+  im.draw("3.png");
+  std::cout<<im.undoStack.size();
+  im.undo();
+  im.undo();
+  im.undo();
+  std::cout<<im.undoStack.size();
+  std::cout<<im.undoStack.empty();
+  im.draw("4.png");
 
   /* NOTA 1: Si usan el mismo nombre para las imágenes, entonces cada llamada al
   método draw() sobreescribirá a la imagen */
